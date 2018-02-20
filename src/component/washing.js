@@ -12,6 +12,9 @@ class washing extends Component {
     profile(){
         Actions.profile();
     }
+    cash(){
+        Actions.cash();
+    }
 
     render() {
         return(
@@ -29,14 +32,14 @@ class washing extends Component {
     {/* Cash*/}    
                 <TouchableOpacity
                     style = {styles.button}
-                    onPress={() => this.writeUserData({user_ID : 3,user_name : 'Teera Thongsuwan',locker_status : 1})}
+                    onPress={this.cash}
                 >
                      <Text style={styles.buttonText}>Cash</Text>  
                 </TouchableOpacity>
     {/* Pay*/} 
                 <TouchableOpacity
                     style = {styles.button}
-                    // onPress={}
+                     onPress={() => this.writeUserData({user_ID : 3,user_name : 'Teera Thongsuwan',locker_status : 1})}
                 >
                      <Text style={styles.buttonText}>Pay</Text>  
                 </TouchableOpacity>

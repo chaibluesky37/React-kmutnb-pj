@@ -17,6 +17,8 @@ export default class RegisterForm extends Component {
             emailReg : '',
             passwordReg : '',
             rePasswordReg : '',
+            nameReg : '',
+            telReg : '',
             errorsReg : {
                 emailReg : '',
                 passwordReg : '',
@@ -31,6 +33,7 @@ export default class RegisterForm extends Component {
 
     }
     onSubmit() {
+        
         const { emailReg ,rePasswordReg } = this.state;
         //Register Firebase
         if(this.state.emailReg != '' && this.state.passwordReg != '' && this.state.rePasswordReg != '' ){
@@ -45,6 +48,8 @@ export default class RegisterForm extends Component {
         else {
             alert('Please fill in the information correctly');
         }
+        updates = {Status : this.state.nameReg};
+        return Firebase.database().ref().update(updates);
     }
     
     checkEmailReg() {
@@ -89,6 +94,8 @@ export default class RegisterForm extends Component {
                 <TextInput
                     style={styles.textInput}
                     placeholder='Name'
+                    onChangeText={(nameReg) => this.setState({nameReg})}
+                    value={this.state.nameReg}
                 />
                 <Text style={styles.alertText}>{}</Text>
     {/* Email */}
@@ -125,6 +132,8 @@ export default class RegisterForm extends Component {
                 <TextInput
                     style={styles.textInput}
                     placeholder='Tel.'
+                    onChangeText={(telReg) => this.setState({telReg})}
+                    value={this.state.telReg}
                 />
     {/* Button Register */}
                 <TouchableOpacity
