@@ -9,7 +9,8 @@ import {
 import Firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Validator from 'validator';
-
+const usID = 0;
+const csID = 0;
 export default class RegisterForm extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +20,8 @@ export default class RegisterForm extends Component {
             rePasswordReg : '',
             nameReg : '',
             telReg : '',
+            userID : usID,
+            CashID : csID,
             errorsReg : {
                 emailReg : '',
                 passwordReg : '',
@@ -33,23 +36,42 @@ export default class RegisterForm extends Component {
 
     }
     onSubmit() {
-        
+
+        // const TotalUs = db.child('TotalUs');
+        // TotalUs.on('value' , snapshot =>{
+            // this.usID = snapshot.val();
+            // this.csID = snapshot.val();
+        // });
         const { emailReg ,rePasswordReg } = this.state;
         //Register Firebase
         if(this.state.emailReg != '' && this.state.passwordReg != '' && this.state.rePasswordReg != '' ){
             Firebase.auth().createUserWithEmailAndPassword(emailReg, rePasswordReg)
-            .then(() => { this.setState({ errorsReg: '' }); })
+            .then(() => { 
+                this.setState({ errorsReg: '' }); 
+                //Write data Firebase
+                Firebase.database().ref('Customer/' + this.state.userID).set({
+                    CashID : this.state.CashID,
+                    Name : this.state.nameReg,
+                    Email : this.state.emailReg ,
+                    Password : this.state.rePasswordReg,
+                    Tel : this.state.telReg
+                });
+                alert('You are registered');
+                // this.usID +=1;
+                // this.csID +=1;
+                Actions.pop();
+                
+            })
             .catch(() => {
                 this.setState({ errorsReg : 'Authentication failed.' });
-                 alert(ths.state.errorsReg)
+                 alert(this.state.errorsReg)
             });
-            Actions.pop();
+            
         } 
         else {
             alert('Please fill in the information correctly');
         }
-        updates = {Status : this.state.nameReg};
-        return Firebase.database().ref().update(updates);
+        
     }
     
     checkEmailReg() {

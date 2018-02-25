@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import CashPage from './pages/CashPage';
+import PayPage from './pages/PayPage';
 
 class Routes extends Component {
     render() {
@@ -18,6 +19,7 @@ class Routes extends Component {
                     <Scene key="register" component={ RegisterPage } title="Register"/>
                     <Scene key="profile" component={ ProfilePage } title="Profile"/>
                     <Scene key="cash" component={ CashPage } title="Cash"/>
+                    <Scene key="pay" component={ PayPage } title="Pay"/>
                 </Stack>
             </Router>
         );
