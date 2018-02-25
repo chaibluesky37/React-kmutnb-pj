@@ -9,8 +9,8 @@ import {
 import Firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Validator from 'validator';
-const usID = 0;
-const csID = 0;
+const usID = 2;
+const csID = 2;
 export default class RegisterForm extends Component {
     constructor(props) {
         super(props);
@@ -37,11 +37,14 @@ export default class RegisterForm extends Component {
     }
     onSubmit() {
 
-        // const TotalUs = db.child('TotalUs');
-        // TotalUs.on('value' , snapshot =>{
-            // this.usID = snapshot.val();
-            // this.csID = snapshot.val();
-        // });
+        /*const TotalUs = firebase.database().ref('TotalUs/');
+        TotalUs.on('value', (snapshot) => {
+            let tl = 0;
+            if (snapshot.val()) {
+                tl = snapshot.val().tl
+            }
+            // usID=tl;
+        });*/
         const { emailReg ,rePasswordReg } = this.state;
         //Register Firebase
         if(this.state.emailReg != '' && this.state.passwordReg != '' && this.state.rePasswordReg != '' ){
